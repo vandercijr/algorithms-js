@@ -41,7 +41,7 @@ const swap = (swap_array, i, j) =>  {
   swap_array[j] = auxiliar;
 }
 
-const bubbleSort = (array_input, order) => {
+export const bubbleSort = (array_input, order) => {
   const asize = array_input.length;
 
   if (asize > 2) {
@@ -63,8 +63,4 @@ const bubbleSort = (array_input, order) => {
       }
     }
   }
-};
-
-module.exports = {
-  bubbleSort : bubbleSort
-};
+}
