@@ -44,7 +44,7 @@ class Node {
 
 //////////////////////////////////////////////////////////////////////////
 // add a node at top of the list
-const addToTop = (id, object)  =>  {
+export const addToTop = (id, object)  =>  {
   let next;
 
   if (typeof head_node !== 'undefined') {
@@ -57,7 +57,7 @@ const addToTop = (id, object)  =>  {
 
 //////////////////////////////////////////////////////////////////////////
 // add a node like push data into an array
-const push = (id, object)  =>  {
+export const push = (id, object)  =>  {
   let current_node = head_node;
   let next;
 
@@ -73,7 +73,7 @@ const push = (id, object)  =>  {
 //////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////
-const remove = (id)  =>  {
+export const remove = (id)  =>  {
   let current_node = head_node;
 
   while (typeof current_node.next !== 'undefined') {
@@ -94,7 +94,7 @@ const remove = (id)  =>  {
 //////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////
-const find = (id)  =>  {
+export const find = (id)  =>  {
   let current_node = head_node;
 
   while (typeof current_node !== 'undefined') {
@@ -109,13 +109,13 @@ const find = (id)  =>  {
 //////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////
-const findAll  = ()  =>  {
+export const findAll  = ()  =>  {
   return head_node;
 }
 //////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////
-const count = () =>  {
+export const count = () =>  {
   let current_node = head_node;
   let count = 0;
 
@@ -127,12 +127,3 @@ const count = () =>  {
   return count;
 };
 //////////////////////////////////////////////////////////////////////////
-
-module.exports = {
-  addToTop : addToTop,
-  push     : push,
-  count    : count,
-  find     : find,
-  findAll  : findAll,
-  remove   : remove
-}
