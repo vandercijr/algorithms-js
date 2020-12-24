@@ -20,10 +20,9 @@ const derivative = {
 
 describe("TDD for black & scholes operations", () => {
   it("Should calculate the expiration days to an given exercise", () => {
-    assert.equal(
-      blacknscholes.expirationDays("2020-05-27", "2020-06-15").toFixed(6),
-      0.052055
-    );
+    expect(
+      blacknscholes.expirationDays("2020-05-27", "2020-06-15")
+    ).toBeCloseTo(0.052055, 6);
   });
 
   it("Should calculate the d1 B&S equation", () => {
@@ -35,7 +34,7 @@ describe("TDD for black & scholes operations", () => {
       derivative.expiration_days
     );
 
-    expect(d1).toBeClosedTo(-0.846743919, 9);
+    expect(d1).toBeCloseTo(-0.846743919, 9);
   });
 
   it("Should calculate the d2 term B&S equation", () => {
@@ -54,7 +53,7 @@ describe("TDD for black & scholes operations", () => {
       derivative.expiration_days
     );
 
-    expect(d2).toBeClosedTo(-1.011015986, 9);
+    expect(d2).toBeCloseTo(-1.011015986, 9);
   });
 
   it("Should calculate the theoretical option price equation for a call", () => {
@@ -81,7 +80,7 @@ describe("TDD for black & scholes operations", () => {
         d2,
         "call"
       )
-    ).toBeClosedTo(0.51, 2);
+    ).toBeCloseTo(0.51, 2);
   });
 
   it("Should calculate the theoretical option price equation for a put", () => {
@@ -108,7 +107,7 @@ describe("TDD for black & scholes operations", () => {
         d2,
         "put"
       )
-    ).toBeClosedTo(5.45, 2);
+    ).toBeCloseTo(5.45, 2);
   });
 
   it("Should calculate the derivative greek delta equation for a call", () => {
@@ -122,7 +121,7 @@ describe("TDD for black & scholes operations", () => {
       )
       .toFixed(9);
 
-    assert.equal(blacknscholes.delta(d1, "call").toFixed(4), 0.1986);
+    expect(blacknscholes.delta(d1, "call")).toBeCloseTo(0.1986, 4);
   });
 
   it("Should calculate the derivative greek delta equation for a put", () => {
@@ -136,7 +135,7 @@ describe("TDD for black & scholes operations", () => {
       )
       .toFixed(9);
 
-    assert.equal(blacknscholes.delta(d1, "put").toFixed(4), -0.8014);
+    expect(blacknscholes.delta(d1, "put")).toBeCloseTo(-0.8014, 4);
   });
 
   it("Should calculate the derivative greek rho equation for a call", () => {
@@ -153,18 +152,15 @@ describe("TDD for black & scholes operations", () => {
       .d2Term(d1, derivative.volatility, derivative.expiration_days)
       .toFixed(9);
 
-    assert.equal(
-      blacknscholes
-        .rho(
-          derivative.strike,
-          derivative.interest_rate,
-          derivative.expiration_days,
-          d2,
-          "call"
-        )
-        .toFixed(6),
-      0.002838
-    );
+    expect(
+      blacknscholes.rho(
+        derivative.strike,
+        derivative.interest_rate,
+        derivative.expiration_days,
+        d2,
+        "call"
+      )
+    ).toBeCloseTo(0.002838, 6);
   });
 
   it("Should calculate the derivative greek rho equation for a put", () => {
@@ -181,18 +177,15 @@ describe("TDD for black & scholes operations", () => {
       .d2Term(d1, derivative.volatility, derivative.expiration_days)
       .toFixed(9);
 
-    assert.equal(
-      blacknscholes
-        .rho(
-          derivative.strike,
-          derivative.interest_rate,
-          derivative.expiration_days,
-          d2,
-          "put"
-        )
-        .toFixed(6),
-      -0.015353
-    );
+    expect(
+      blacknscholes.rho(
+        derivative.strike,
+        derivative.interest_rate,
+        derivative.expiration_days,
+        d2,
+        "put"
+      )
+    ).toBeCloseTo(-0.015353, 6);
   });
 
   it("Should calculate the derivative greek gamma equation", () => {
@@ -206,17 +199,14 @@ describe("TDD for black & scholes operations", () => {
       )
       .toFixed(9);
 
-    assert.equal(
-      blacknscholes
-        .gamma(
-          derivative.stock_price,
-          derivative.volatility,
-          derivative.expiration_days,
-          d1
-        )
-        .toFixed(6),
-      0.056563
-    );
+    expect(
+      blacknscholes.gamma(
+        derivative.stock_price,
+        derivative.volatility,
+        derivative.expiration_days,
+        d1
+      )
+    ).toBeCloseTo(0.056563, 6);
   });
 
   it("Should calculate the derivative greek vega equation", () => {
@@ -230,12 +220,9 @@ describe("TDD for black & scholes operations", () => {
       )
       .toFixed(9);
 
-    assert.equal(
-      blacknscholes
-        .vega(derivative.stock_price, derivative.expiration_days, d1)
-        .toFixed(6),
-      0.01908
-    );
+    expect(
+      blacknscholes.vega(derivative.stock_price, derivative.expiration_days, d1)
+    ).toBeCloseTo(0.01908, 6);
   });
 
   it("Should calculate the derivative greek theta equation for a call", () => {
@@ -252,21 +239,18 @@ describe("TDD for black & scholes operations", () => {
       .d2Term(d1, derivative.volatility, derivative.expiration_days)
       .toFixed(9);
 
-    assert.equal(
-      blacknscholes
-        .theta(
-          derivative.stock_price,
-          derivative.strike,
-          derivative.volatility,
-          derivative.interest_rate,
-          derivative.expiration_days,
-          d1,
-          d2,
-          "call"
-        )
-        .toFixed(6),
-      -0.036599
-    );
+    expect(
+      blacknscholes.theta(
+        derivative.stock_price,
+        derivative.strike,
+        derivative.volatility,
+        derivative.interest_rate,
+        derivative.expiration_days,
+        d1,
+        d2,
+        "call"
+      )
+    ).toBeCloseTo(-0.036599, 6);
   });
 
   it("Should calculate the derivative greek theta equation for a put", () => {
@@ -283,36 +267,43 @@ describe("TDD for black & scholes operations", () => {
       .d2Term(d1, derivative.volatility, derivative.expiration_days)
       .toFixed(9);
 
-    assert.equal(
-      blacknscholes
-        .theta(
-          derivative.stock_price,
-          derivative.strike,
-          derivative.volatility,
-          derivative.interest_rate,
-          derivative.expiration_days,
-          d1,
-          d2,
-          "put"
-        )
-        .toFixed(6),
-      -0.033727
-    );
+    expect(
+      blacknscholes.theta(
+        derivative.stock_price,
+        derivative.strike,
+        derivative.volatility,
+        derivative.interest_rate,
+        derivative.expiration_days,
+        d1,
+        d2,
+        "put"
+      )
+    ).toBeCloseTo(-0.033727, 6);
   });
 
   it("Should calculate the implied volatility for a derivative call", () => {
-    assert.equal(
-      blacknscholes
-        .impliedVolatility(
-          derivative.stock_price,
-          derivative.strike,
-          derivative.interest_rate,
-          derivative.expiration_days,
-          1.02,
-          "call"
-        )
-        .toFixed(4),
-      0.9619
-    );
+    expect(
+      blacknscholes.impliedVolatility(
+        derivative.stock_price,
+        derivative.strike,
+        derivative.interest_rate,
+        derivative.expiration_days,
+        1.02,
+        "call"
+      )
+    ).toBeCloseTo(0.9619, 4);
+  });
+
+  it("Should calculate the implied volatility for a derivative call", () => {
+    expect(
+      blacknscholes.impliedVolatility(
+        derivative.stock_price,
+        derivative.strike,
+        derivative.interest_rate,
+        derivative.expiration_days,
+        1.02,
+        "put"
+      )
+    ).toBeCloseTo(0.9619, 4);
   });
 });
