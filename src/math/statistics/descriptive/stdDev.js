@@ -10,4 +10,4 @@
 
 import { variance } from "./variance";
 
-export const stdDev = (input) => Math.sqrt(variance(input));
+export const stdDev = (input) => variance(input) ** 0.5;
