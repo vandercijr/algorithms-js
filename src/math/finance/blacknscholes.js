@@ -6,7 +6,7 @@
  * Data: 18/03/2020
  */
 import { gauss } from "../gauss";
-import { goalSeek } from "../goalseek";
+import { goalseek } from "../goalseek";
 
 const eulerRateTime = (interest_rate, expiration_days) =>
   Math.exp(interest_rate * expiration_days * -1);
@@ -132,7 +132,7 @@ export const blacknscholes = {
       );
     };
 
-    let y = goalSeek(
+    return goalseek(
       derivative_price,
       0.01,
       5,
@@ -140,7 +140,5 @@ export const blacknscholes = {
       Math.pow(10, 3),
       fn
     );
-
-    return y;
   },
 };
