@@ -294,16 +294,16 @@ describe("TDD for black & scholes operations", () => {
     ).toBeCloseTo(0.9619, 4);
   });
 
-  it("Should calculate the implied volatility for a derivative call", () => {
+  it("Should calculate the implied volatility for a derivative put", () => {
     expect(
       blacknscholes.impliedVolatility(
         derivative.stock_price,
         derivative.strike,
         derivative.interest_rate,
         derivative.expiration_days,
-        1.02,
+        5.5,
         "put"
       )
-    ).toBeCloseTo(0.9619, 4);
+    ).toBeCloseTo(0.7454, 4);
   });
 });
