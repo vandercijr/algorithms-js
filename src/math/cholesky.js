@@ -6,7 +6,7 @@
  * Data: 30/11/2020
  *
  */
-export const cholesky = input => {  
+export const decompose = input => {  
   const n = input.length
   let i,j,k, sum=0, p=[]
 
@@ -20,20 +20,20 @@ export const cholesky = input => {
     }
   }
 
-  return {a: a, d: p}
+  return {output: input, d: p}
 }
 
-const choleskySolver = (a, d, b) => {  
-  const n = a.length
+const solver = (input, d, b) => {  
+  const n = input.length
   let i,k, sum=0, x=[]
 
   for (i=0;i<n;i++) {
-    for (sum=b[i],k=i-1;k>=0;k--) sum -= a[i][k]*x[k]
+    for (sum=b[i],k=i-1;k>=0;k--) sum -= input[i][k]*x[k]
     x[i]=sum/d[i]
   }
-  console.log('x1 ', x)
+
   for (i=n;i>=0;i--) {
-    for (sum=x[i],k=i+1;k<n;k++) sum -= a[k][i]*x[k]
+    for (sum=x[i],k=i+1;k<n;k++) sum -= input[k][i]*x[k]
     x[i]=sum/d[i];
   }
 }
