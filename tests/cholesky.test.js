@@ -10,7 +10,7 @@
 
 import { decompose, solver } from "../src/math/cholesky";
 
-describe("TDD for cholesky decomposition method", () => {
+describe("Test for cholesky decomposition method", () => {
   it("Should find the decomposed matrix", () => {
     const input_matrix = [
       [6, 15, 55],
@@ -31,7 +31,28 @@ describe("TDD for cholesky decomposition method", () => {
   });
 });
 
-describe("TDD for cholesky decomposition solver method", () => {
+describe("Test 2 for cholesky decomposition method", () => {
+  it("Should find the decomposed matrix", () => {
+    const input_matrix = [
+      [10, -2, 3],
+      [-2, 5, 2],
+      [3, 2, 6],
+    ];
+
+    const decomposed_matrix = {
+      lower_triangular: [
+        [10, -2, 3],
+        [-0.6324555320336759, 5, 2],
+        [0.9486832980505138, 1.212256250712408, 6],
+      ],
+      diagonal: [3.1622776601683795, 2.1447610589527217, 1.905369985753081],
+    };
+
+    expect(decompose(input_matrix)).toEqual(decomposed_matrix);
+  });
+});
+
+describe("Test for cholesky decomposition solver method", () => {
   it("Should find the solution for linear system", () => {
     const input_matrix = [
       [6, 15, 55],
