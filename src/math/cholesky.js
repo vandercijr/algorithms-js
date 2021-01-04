@@ -20,12 +20,12 @@ export const decompose = (input) => {
         sum -= input[i][k] * input[j][k];
       if (i == j) {
         if (sum <= 0.0) throw "cholesky composition failed";
-        p[i] = Math.sqrt(sum);
-      } else a[j][i] = sum / p[i];
+        p[i] = sum ** 0.5; //sqrt
+      } else input[j][i] = sum / p[i];
     }
   }
 
-  return { output: input, d: p };
+  return { lower_triangular: input, diagonal: p };
 };
 
 export const solver = (input, d, b) => {
@@ -35,13 +35,17 @@ export const solver = (input, d, b) => {
     sum = 0,
     x = [];
 
+  // Solve L . y = b
   for (i = 0; i < n; i++) {
     for (sum = b[i], k = i - 1; k >= 0; k--) sum -= input[i][k] * x[k];
     x[i] = sum / d[i];
   }
 
-  for (i = n; i >= 0; i--) {
-    for (sum = x[i], k = i + 1; k < n; k++) sum -= input[k][i] * x[k];
-    x[i] = sum / d[i];
-  }
+  // // Solve LT . x = y
+  // for (i = n; i >= 0; i--) {
+  //   for (sum = x[i], k = i + 1; k < n; k++) sum -= input[k][i] * x[k];
+  //   x[i] = sum / d[i];
+  // }
+
+  return x;
 };
