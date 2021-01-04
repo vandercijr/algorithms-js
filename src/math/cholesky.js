@@ -6,45 +6,44 @@
  * Data: 30/11/2020
  *
  */
-export const decompose = (input) => {
-  const n = input.length;
-  let i,
-    j,
-    k,
+export const decompose = (matrix) => {
+  const matrix_size = matrix.length;
+  let k,
     sum = 0,
-    p = [];
+    diagonal_part = [];
 
-  for (i = 0; i < n; i++) {
-    for (j = i; j < n; j++) {
-      for (sum = input[i][j], k = i - 1; k >= 0; k--)
-        sum -= input[i][k] * input[j][k];
+  for (let i = 0; i < matrix_size; i++) {
+    for (let j = i; j < matrix_size; j++) {
+      for (sum = matrix[i][j], k = i - 1; k >= 0; k--)
+        sum -= matrix[i][k] * matrix[j][k];
+
       if (i == j) {
         if (sum <= 0.0) throw "cholesky composition failed";
-        p[i] = sum ** 0.5; //sqrt
-      } else input[j][i] = sum / p[i];
+        diagonal_part[i] = sum ** 0.5; //sqrt
+      } else matrix[j][i] = sum / diagonal_part[i];
     }
   }
 
-  return { lower_triangular: input, diagonal: p };
+  return { lower_triangular: matrix, diagonal: diagonal_part };
 };
 
-export const solver = (input, d, b) => {
-  const n = input.length;
+export const solver = (matrix, diagonal, b) => {
+  const matrix_size = matrix.length;
   let i,
     k,
     sum = 0,
     x = [];
 
   // Solve L . y = b
-  for (i = 0; i < n; i++) {
-    for (sum = b[i], k = i - 1; k >= 0; k--) sum -= input[i][k] * x[k];
-    x[i] = sum / d[i];
+  for (i = 0; i < matrix_size; i++) {
+    for (sum = b[i], k = i - 1; k >= 0; k--) sum -= matrix[i][k] * x[k];
+    x[i] = sum / diagonal[i];
   }
 
   // // Solve LT . x = y
   // for (i = n; i >= 0; i--) {
-  //   for (sum = x[i], k = i + 1; k < n; k++) sum -= input[k][i] * x[k];
-  //   x[i] = sum / d[i];
+  //   for (sum = x[i], k = i + 1; k < n; k++) sum -= matrix[k][i] * x[k];
+  //   x[i] = sum / diagonal[i];
   // }
 
   return x;
