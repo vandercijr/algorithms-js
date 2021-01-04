@@ -3,7 +3,7 @@
  * Arquivo: goalseek.js
  * Author: Vanderci Curvelo Junior
  * Description: implementation of goal seek function
- * Data: 28905/2020
+ * Data: 28/05/2020
  *
  */
 import { bisection } from "./bisection";
