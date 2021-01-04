@@ -1,3 +1,11 @@
+"use strict";
+/**
+ * Arquivo: cholesky.js
+ * Author: Vanderci Curvelo Junior
+ * Description: implementation of cholesky decomposition and solver for linear equation systems
+ * Data: 30/11/2020
+ *
+ */
 export const cholesky = input => {  
   const n = input.length
   let i,j,k, sum=0, p=[]
